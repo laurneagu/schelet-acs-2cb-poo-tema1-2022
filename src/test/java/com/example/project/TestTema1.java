@@ -12,64 +12,72 @@ import java.io.*;
 public class TestTema1
 {
 
-   @Test
-   public void testDummy()
-   {
-     PrintStream originalOut = System.out;
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     System.setOut(new PrintStream(bos));
+    @Test
+    public void testDummy()
+    {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-     // action
-     Tema1.main(null);
+        // action
+        Tema1.main(null);
 
 
-     //System.out.println(bos.toString().trim());
-     // assertion
-     assertEquals("Hello world!", bos.toString().trim());
-     //assertEquals(true, true);
+        //System.out.println(bos.toString().trim());
+        // assertion
+        assertEquals("Hello world!", bos.toString().trim());
+        //assertEquals(true, true);
 
-     // undo the binding in System
-     System.setOut(originalOut);
-   }
+        // undo the binding in System
+        System.setOut(originalOut);
+    }
 
     //region 1 Creare utilizator
-   @Test
-   public void testCreateUserUserAlreadyExists()
-   {
-       PrintStream originalOut = System.out;
-       ByteArrayOutputStream bos = new ByteArrayOutputStream();
-       System.setOut(new PrintStream(bos));
+    @Test
+    public void testCreateUserUserAlreadyExists()
+    {
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-       // action
-       Tema1.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-       // assertion
+        // action
+        Tema1.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
+
+        // assertion
 //       assertEquals("{ 'status' : 'ok', 'message' : 'User created successfully'}".replace("' ", "'").replace(" '","'"),
 //               bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
-       bos = new ByteArrayOutputStream();
-       System.setOut(new PrintStream(bos));
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-       // action
+        // action
 
-       Tema1.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
+        Tema1.main(new String[]{"-create-user", "-u 'uchii_cu_cel'", "-p 'unghii2022'"});
 
-       // assertion
-       assertEquals("{ 'status' : 'error', 'message' : 'User already exists'}".replace("' ", "'").replace(" '","'"),
-               bos.toString().trim().replace("' ", "'").replace(" '","'"));
+        // assertion
+        assertEquals("{ 'status' : 'error', 'message' : 'User already exists'}".replace("' ", "'").replace(" '","'"),
+                bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
-       // undo the binding in System
-       System.setOut(originalOut);
+        // undo the binding in System
+        System.setOut(originalOut);
 
-       // action
-       Tema1.main(new String[]{"-cleanup-all"});
-   }
+        // action
+        Tema1.main(new String[]{"-cleanup-all"});
+    }
 
     @Test
     public void testCreateUserNoUsername()
     {
         PrintStream originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
@@ -93,6 +101,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'uchii_cu_cel'"});
 
@@ -112,6 +124,10 @@ public class TestTema1
     {
         PrintStream originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
@@ -139,6 +155,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-question"});
 
@@ -160,6 +180,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-question", "-u 'test'"});
 
@@ -177,49 +201,57 @@ public class TestTema1
     @Test
     public void testCreateQuestionUsernameDoesNotExists()
     {
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-      // action
-      Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-      // assertion
-      assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
-                    bos.toString().trim().replace("' ", "'").replace(" '","'"));
+        // action
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'"});
 
-      // undo the binding in System
-      System.setOut(originalOut);
+        // assertion
+        assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
+                bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
-      // action
-      Tema1.main(new String[]{"-cleanup-all"});
+        // undo the binding in System
+        System.setOut(originalOut);
+
+        // action
+        Tema1.main(new String[]{"-cleanup-all"});
     }
 
     @Test
     public void testCreateQuestionLoginCredentialsAreWrong()
     {
-      PrintStream originalOut = System.out;
-      ByteArrayOutputStream bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-      // action
-      Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-      bos = new ByteArrayOutputStream();
-      System.setOut(new PrintStream(bos));
+        // action
+        Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
-      // action
-      Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test2'"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
-      // assertion
-      assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
-                    bos.toString().trim().replace("' ", "'").replace(" '","'"));
+        // action
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test2'"});
 
-      // undo the binding in System
-      System.setOut(originalOut);
+        // assertion
+        assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
+                bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
-      // action
-      Tema1.main(new String[]{"-cleanup-all"});
+        // undo the binding in System
+        System.setOut(originalOut);
+
+        // action
+        Tema1.main(new String[]{"-cleanup-all"});
     }
 
     @Test
@@ -227,6 +259,10 @@ public class TestTema1
     {
         PrintStream originalOut = System.out;
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
@@ -237,13 +273,13 @@ public class TestTema1
 
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct 1", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct 1", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct 1", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Question already exists'}".replace("' ", "'").replace(" '","'"),
@@ -263,6 +299,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -270,7 +310,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No answer provided'}".replace("' ", "'").replace(" '","'"),
@@ -290,6 +330,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -297,7 +341,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Only one answer provided'}".replace("' ", "'").replace(" '","'"),
@@ -317,6 +361,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -324,7 +372,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No question text provided'}".replace("' ", "'").replace(" '","'"),
@@ -344,6 +392,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -351,7 +403,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'","-answer-2 'No'", "-answer-2-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'","-answer-2 'No'", "-answer-2-is-correct '1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Single correct answer question has more than one correct answer'}".replace("' ", "'").replace(" '","'"),
@@ -372,6 +424,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -379,7 +435,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Same answer provided more than once'}".replace("' ", "'").replace(" '","'"),
@@ -399,6 +455,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -406,7 +466,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1-is-correct 1","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1-is-correct 1","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Answer 1 has no answer description'}".replace("' ", "'").replace(" '","'"),
@@ -426,6 +486,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -433,7 +497,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'","-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'","-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Answer 1 has no answer correct flag'}".replace("' ", "'").replace(" '","'"),
@@ -453,6 +517,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -460,10 +528,10 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'Question added successfully'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : 'Question added successfully'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -483,8 +551,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-question-id-by-text"});
+        Tema1.main(new String[]{"-get-question-id-by-text"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -504,8 +576,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-question-id-by-text", "-u 'test'"});
+        Tema1.main(new String[]{"-get-question-id-by-text", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -525,8 +601,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-question-id-by-text", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-question-id-by-text", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -546,6 +626,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -553,7 +637,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-question-id-by-text", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-question-id-by-text", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -573,6 +657,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         //action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -580,7 +668,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-question-id-by-text", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'"});
+        Tema1.main(new String[]{"-get-question-id-by-text", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Question does not exist'}".replace("' ", "'").replace(" '","'"),
@@ -600,30 +688,34 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–create-user", "-u 'test'", "-p 'test'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–get-question-id-by-text", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'"});
+        Tema1.main(new String[]{"-get-question-id-by-text", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'"});
 
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '1'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '1'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
         System.setOut(originalOut);
 
         // action
-        Tema1.main(new String[]{"–cleanup-all"});
+        Tema1.main(new String[]{"-cleanup-all"});
     }
     //endregion
 
@@ -635,8 +727,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-questions"});
+        Tema1.main(new String[]{"-get-all-questions"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -656,8 +752,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-questions", "-u 'test'"});
+        Tema1.main(new String[]{"-get-all-questions", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -677,8 +777,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-questions", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-all-questions", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -698,6 +802,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -705,7 +813,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-all-questions", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-all-questions", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -725,6 +833,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -732,21 +844,21 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-all-questions", "-u 'test'", "-p 'test'"});
+        Tema1.main(new String[]{"-get-all-questions", "-u 'test'", "-p 'test'"});
         //assertion
-        assertEquals("{ 'status' : 'error', 'message' : '[{\"question_id\" : \"1\", \"question_name\" : \"Cerul este albastru\"}, {\"question_id\": \"2\", \"question_name\" : \"Temperatura se poate măsura în\"}]}'".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '[{\"question_id\" : \"1\", \"question_name\" : \"Cerul este albastru\"}, {\"question_id\" : \"2\", \"question_name\" : \"Temperatura se poate măsura în\"}]}'".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '", "'"));
 
 
@@ -768,8 +880,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–create-quizz"});
+        Tema1.main(new String[]{"-create-quizz"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -789,8 +905,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -810,8 +930,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -831,6 +955,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -838,7 +966,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -858,31 +986,35 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         //action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Quizz name already exists'}".replace("' ", "'").replace(" '","'"),
@@ -902,19 +1034,23 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Question ID for question 2 does not exist'}".replace("' ", "'").replace(" '","'"),
@@ -934,28 +1070,32 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct 1", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct 1", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'Quizz added succesfully'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : 'Quizz added succesfully'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -976,8 +1116,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-by-name"});
+        Tema1.main(new String[]{"-get-quizz-by-name"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -997,8 +1141,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-by-name", "-u 'test'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1018,8 +1166,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-by-name", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1039,6 +1191,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1046,7 +1202,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-quizz-by-name", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1066,6 +1222,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         //action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1073,7 +1233,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Quizz does not exist'}".replace("' ", "'").replace(" '","'"),
@@ -1093,33 +1253,37 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '1'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '1'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1139,8 +1303,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-quizzes"});
+        Tema1.main(new String[]{"-get-all-quizzes"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1160,8 +1328,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-quizzes", "-u 'test'"});
+        Tema1.main(new String[]{"-get-all-quizzes", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1181,8 +1353,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-all-quizzes", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-all-quizzes", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1202,6 +1378,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1209,7 +1389,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-all-quizzes", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-all-quizzes", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1229,51 +1409,55 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Intrebarea 3'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
-
-        bos = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(bos));
-
-        // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Intrebarea 4'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Intrebarea 3'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Intrebarea 4'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 2'", "-question-1 '3'", "-question-2 '4'"});
+        // action
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–get-all-quizzes", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 2'", "-question-1 '3'", "-question-2 '4'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-get-all-quizzes", "-u 'test'", "-p 'test'"});
 
 
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '[{\"quizz_id\" : \"1\", \"quizz_name\" : \"Chestionarul 1\", \"is_completed\" : False}, {\"quizz_id\" : \"2\", \"quizz_name\" : \"Chestionarul 2\", \"is_completed\" : \"False\"}]'".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '[{\"quizz_id\" : \"1\", \"quizz_name\" : \"Chestionarul 1\", \"is_completed\" : \"False\"}, {\"quizz_id\" : \"2\", \"quizz_name\" : \"Chestionarul 2\", \"is_completed\" : \"False\"}]'".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1293,8 +1477,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-details-by-id"});
+        Tema1.main(new String[]{"-get-quizz-details-by-id"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1314,8 +1502,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-details-by-id", "-u 'test'"});
+        Tema1.main(new String[]{"-get-quizz-details-by-id", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1335,8 +1527,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-quizz-details-by-id", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-quizz-details-by-id", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1356,6 +1552,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1363,7 +1563,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-quizz-details-by-id", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-quizz-details-by-id", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1384,33 +1584,37 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test2'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–get-quizz-details-by-id", "-u 'test'", "-p 'test'", "-id '1'"});
+        Tema1.main(new String[]{"-get-quizz-details-by-id", "-u 'test'", "-p 'test'", "-id '1'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '[{\"question-name\":\"Cerul este albastru\", \"question_index\":\"1\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"Yes\", \"answer_id\":\"1\"}, {\"answer_name\":\"No\", \"answer_id\":\"2\"}]'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{'status':'ok','message':'[{\"question-name\":\"Cerul este albastru\", \"question_index\":\"1\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"Yes\", \"answer_id\":\"1\"}, {\"answer_name\":\"No\", \"answer_id\":\"2\"}]\"}, {\"question-name\":\"Temperatura se poate măsura în\", \"question_index\":\"2\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"C\", \"answer_id\":\"3\"}, {\"answer_name\":\"L\", \"answer_id\":\"4\"}]\"}]'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1431,8 +1635,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–submit-quizz"});
+        Tema1.main(new String[]{"-submit-quizz"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1452,8 +1660,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1473,8 +1685,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1494,6 +1710,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1501,7 +1721,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1521,6 +1741,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1528,7 +1752,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No quizz identifier was provided'}".replace("' ", "'").replace(" '","'"),
@@ -1549,30 +1773,34 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'", "quiz-id '2'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test'", "quiz-id '2'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No quiz was found'}".replace("' ", "'").replace(" '","'"),
@@ -1593,33 +1821,42 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'", "quiz-id '1'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '100 points'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '100 points'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1636,33 +1873,42 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '4'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '4'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '0 points'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '0 points'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1679,38 +1925,47 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'multiple'","-answer-1 'Celsius'", "-answer-1-is-correct '1'", "-answer-2 'Litri'", "-answer-2-is-correct '0'", "-answer-3 'Fahrenheit'", "-answer-3-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'multiple'","-answer-1 'Celsius'", "-answer-1-is-correct '1'", "-answer-2 'Litri'", "-answer-2-is-correct '0'", "-answer-3 'Fahrenheit'", "-answer-3-is-correct '1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Urmatoarele sunt animale de companie'", "-type 'multiple'","-answer-1 'Caine'", "-answer-1-is-correct '1'", "-answer-2 'Grifon'", "-answer-2-is-correct '0'", "-answer-3 'Pisica'", "-answer-3-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Urmatoarele sunt animale de companie'", "-type 'multiple'","-answer-1 'Caine'", "-answer-1-is-correct '1'", "-answer-2 'Grifon'", "-answer-2-is-correct '0'", "-answer-3 'Pisica'", "-answer-3-is-correct '1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'", "-question-3 '3'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'", "-question-3 '3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'", "quiz-id '1'", "-answer-id-1 '3'", "-answer-id-2 '5'", "-answer-id-3 '6'", "-answer-id-4 '8'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '3'", "-answer-id-2 '5'", "-answer-id-3 '6'", "-answer-id-4 '8'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '67 points'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '67 points'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1727,38 +1982,47 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'multiple'","-answer-1 'Celsius'", "-answer-1-is-correct '1'", "-answer-2 'Litri'", "-answer-2-is-correct '0'", "-answer-3 'Fahrenheit'", "-answer-3-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'multiple'","-answer-1 'Celsius'", "-answer-1-is-correct '1'", "-answer-2 'Litri'", "-answer-2-is-correct '0'", "-answer-3 'Fahrenheit'", "-answer-3-is-correct '1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Urmatoarele sunt animale de companie'", "-type 'multiple'","-answer-1 'Caine'", "-answer-1-is-correct '1'", "-answer-2 'Grifon'", "-answer-2-is-correct '0'", "-answer-3 'Pisica'", "-answer-3-is-correct '1'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Urmatoarele sunt animale de companie'", "-type 'multiple'","-answer-1 'Caine'", "-answer-1-is-correct '1'", "-answer-2 'Grifon'", "-answer-2-is-correct '0'", "-answer-3 'Pisica'", "-answer-3-is-correct '1'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'", "-question-3 '3'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'", "-question-3 '3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '3'", "-answer-id-3 '5'", "-answer-id-4 '6'", "-answer-id-5 '8'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '3'", "-answer-id-3 '5'", "-answer-id-4 '6'", "-answer-id-5 '8'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '33 points'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '33 points'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1777,8 +2041,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–delete-quizz-by-id"});
+        Tema1.main(new String[]{"-delete-quizz-by-id"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1798,8 +2066,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -1819,8 +2091,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1840,6 +2116,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1847,7 +2127,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -1867,6 +2147,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -1874,7 +2158,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No quizz identifier was provided'}".replace("' ", "'").replace(" '","'"),
@@ -1895,30 +2179,34 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'", "-p -'test2'", "-id '2'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'", "-p 'test2'", "-id '2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No quiz was found'}".replace("' ", "'").replace(" '","'"),
@@ -1939,33 +2227,37 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–delete-quizz-by-id", "-u 'test'", "-p -'test2'", "-id '1'"});
+        Tema1.main(new String[]{"-delete-quizz-by-id", "-u 'test'", "-p 'test'", "-id '1'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : 'Quizz deleted successfully'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : 'Quizz deleted successfully'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
@@ -1986,9 +2278,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-my-solutions"});
+        Tema1.main(new String[]{"-get-my-solutions"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -2008,9 +2303,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-my-solutions", "-u test"});
+        Tema1.main(new String[]{"-get-my-solutions", "-u test"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
@@ -2030,8 +2328,12 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
-        Tema1.main(new String[]{"–get-my-solutions", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-my-solutions", "-u 'test'", "-p 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -2051,6 +2353,10 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
@@ -2058,7 +2364,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–get-my-solutions", "-u 'test'", "-p -'test2'"});
+        Tema1.main(new String[]{"-get-my-solutions", "-u 'test'", "-p 'test2'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Login failed'}".replace("' ", "'").replace(" '","'"),
@@ -2078,38 +2384,47 @@ public class TestTema1
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
+        Tema1.main(new String[]{"-cleanup-all"});
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
         // action
         Tema1.main(new String[]{"-create-user", "-u 'test'", "-p 'test'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-user", "-u 'test2'", "-p 'test2'"});
+
+        bos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bos));
+
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'","-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-question", "-u 'test'", "-p -'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"–create-quizz", "-u 'test'", "-p -'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-create-quizz", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'", "-question-1 '1'", "-question-2 '2'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–submit-quizz", "-u 'test'", "-p -'test'", "-quiz-id '1'", "-question-1 '1'", "-question-2 '2'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "-quiz-id '1'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"–get-my-solutions", "-u 'test'", "-p -'test'"});
+        Tema1.main(new String[]{"-get-my-solutions", "-u 'test2'", "-p 'test2'"});
 
         // assertion
-        assertEquals("{ 'status' : 'error', 'message' : '[{\"quiz-id\" : \"1\", \"quiz-name\" : \"Chestionarul 1\", \"score\" : \"100\", \"index_in_list\" : \"1\"}]'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '[{\"quiz-id\" : \"1\", \"quiz-name\" : \"Chestionarul 1\", \"score\" : \"100\", \"index_in_list\" : \"1\"}]'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
