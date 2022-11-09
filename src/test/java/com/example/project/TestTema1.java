@@ -1800,7 +1800,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test'", "quiz-id '2'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test'", "-p 'test'", "-quiz-id '2'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'No quiz was found'}".replace("' ", "'").replace(" '","'"),
@@ -1853,7 +1853,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "-quiz-id '1'", "-answer-id-1 '1'", "-answer-id-2 '3'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : '100 points'}".replace("' ", "'").replace(" '","'"),
@@ -1905,7 +1905,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '4'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "-quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '4'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : '0 points'}".replace("' ", "'").replace(" '","'"),
@@ -1962,7 +1962,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '3'", "-answer-id-2 '5'", "-answer-id-3 '6'", "-answer-id-4 '8'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "-quiz-id '1'", "-answer-id-1 '3'", "-answer-id-2 '5'", "-answer-id-3 '6'", "-answer-id-4 '8'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : '67 points'}".replace("' ", "'").replace(" '","'"),
@@ -2019,7 +2019,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '3'", "-answer-id-3 '5'", "-answer-id-4 '6'", "-answer-id-5 '8'"});
+        Tema1.main(new String[]{"-submit-quizz", "-u 'test2'", "-p 'test2'", "-quiz-id '1'", "-answer-id-1 '2'", "-answer-id-2 '3'", "-answer-id-3 '5'", "-answer-id-4 '6'", "-answer-id-5 '8'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : '33 points'}".replace("' ", "'").replace(" '","'"),
