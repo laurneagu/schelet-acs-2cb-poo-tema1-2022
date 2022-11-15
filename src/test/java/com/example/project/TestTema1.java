@@ -85,7 +85,7 @@ public class TestTema1
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Please provide username'}".replace("' ", "'").replace(" '","'"),
-                bos.toString().replace("' ", "'").replace(" '","'"));
+                bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
         System.setOut(originalOut);
@@ -279,7 +279,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct 1", "-answer-2 'No'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1 'Yes'", "-answer-1-is-correct '1'", "-answer-2 'No'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Question already exists'}".replace("' ", "'").replace(" '","'"),
@@ -466,7 +466,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1-is-correct 1","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Cerul este albastru'", "-type 'single'", "-answer-1-is-correct '1'","-answer-2 'Yes'", "-answer-2-is-correct '0'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Answer 1 has no answer description'}".replace("' ", "'").replace(" '","'"),
@@ -1233,7 +1233,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'Quizz does not exist'}".replace("' ", "'").replace(" '","'"),
@@ -1280,7 +1280,7 @@ public class TestTema1
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
 
-        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-text 'Chestionarul 1'"});
+        Tema1.main(new String[]{"-get-quizz-by-name", "-u 'test'", "-p 'test'", "-name 'Chestionarul 1'"});
 
         // assertion
         assertEquals("{ 'status' : 'ok', 'message' : '1'}".replace("' ", "'").replace(" '","'"),
