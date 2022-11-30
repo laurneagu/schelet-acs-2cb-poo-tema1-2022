@@ -850,7 +850,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate masura in'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -858,7 +858,7 @@ public class TestTema1
         // action
         Tema1.main(new String[]{"-get-all-questions", "-u 'test'", "-p 'test'"});
         //assertion
-        assertEquals("{ 'status' : 'ok', 'message' : '[{\"question_id\" : \"1\", \"question_name\" : \"Cerul este albastru\"}, {\"question_id\" : \"2\", \"question_name\" : \"Temperatura se poate măsura în\"}]'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{ 'status' : 'ok', 'message' : '[{\"question_id\" : \"1\", \"question_name\" : \"Cerul este albastru\"}, {\"question_id\" : \"2\", \"question_name\" : \"Temperatura se poate masura in\"}]'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '", "'"));
 
 
@@ -1600,7 +1600,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate măsura în'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
+        Tema1.main(new String[]{"-create-question", "-u 'test'", "-p 'test'", "-text 'Temperatura se poate masura in'", "-type 'single'","-answer-1 'C'", "-answer-1-is-correct '1'", "-answer-2 'L'", "-answer-2-is-correct '0'"});
 
         bos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bos));
@@ -1614,7 +1614,7 @@ public class TestTema1
         Tema1.main(new String[]{"-get-quizz-details-by-id", "-u 'test'", "-p 'test'", "-id '1'"});
 
         // assertion
-        assertEquals("{'status':'ok','message':'[{\"question-name\":\"Cerul este albastru\", \"question_index\":\"1\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"Yes\", \"answer_id\":\"1\"}, {\"answer_name\":\"No\", \"answer_id\":\"2\"}]\"}, {\"question-name\":\"Temperatura se poate măsura în\", \"question_index\":\"2\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"C\", \"answer_id\":\"3\"}, {\"answer_name\":\"L\", \"answer_id\":\"4\"}]\"}]'}".replace("' ", "'").replace(" '","'"),
+        assertEquals("{'status':'ok','message':'[{\"question-name\":\"Cerul este albastru\", \"question_index\":\"1\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"Yes\", \"answer_id\":\"1\"}, {\"answer_name\":\"No\", \"answer_id\":\"2\"}]\"}, {\"question-name\":\"Temperatura se poate masura in\", \"question_index\":\"2\", \"question_type\":\"single\", \"answers\":\"[{\"answer_name\":\"C\", \"answer_id\":\"3\"}, {\"answer_name\":\"L\", \"answer_id\":\"4\"}]\"}]'}".replace("' ", "'").replace(" '","'"),
                 bos.toString().trim().replace("' ", "'").replace(" '","'"));
 
         // undo the binding in System
