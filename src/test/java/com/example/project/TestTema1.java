@@ -2308,7 +2308,7 @@ public class TestTema1
         System.setOut(new PrintStream(bos));
 
         // action
-        Tema1.main(new String[]{"-get-my-solutions", "-u test"});
+        Tema1.main(new String[]{"-get-my-solutions", "-u 'test'"});
 
         // assertion
         assertEquals("{ 'status' : 'error', 'message' : 'You need to be authenticated'}".replace("' ", "'").replace(" '","'"),
